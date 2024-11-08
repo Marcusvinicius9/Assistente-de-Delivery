@@ -1,0 +1,27 @@
+/* Definição do Fluxo em JSON */
+
+{
+    "Comment": "Fluxo do Assistente de Delivery",
+    "StartAt": "ReceberPedido",
+    "States": {
+        "ReceberPedido": {
+            "Type": "Pass",
+            "Next": "ValidarPedido"
+        },
+        "ValidarPedido": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:123456789012:function:validarPedido",
+            "Next": "ProcessarPagamento"
+        },
+        "ProcessarPagamento": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:123456789012:function:processarPagamento",
+            "Next": "AtualizarStatus"
+        },
+        "AtualizarStatus": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:123456789012:function:atualizarStatus",
+            "End": True
+        }
+    }
+}
